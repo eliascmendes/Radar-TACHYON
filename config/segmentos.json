@@ -1,0 +1,145 @@
+{
+  "segmentos": [
+    {
+      "id": "clinicas",
+      "nome": "Clínicas, consultórios, laboratórios, estúdios e salões",
+      "prioridade": "alta",
+      "motivo": "Agendamento online e painel de gestão.",
+      "termos": [
+        "clínica odontológica",
+        "consultório odontológico",
+        "clínica médica",
+        "laboratório de análises",
+        "salão de beleza",
+        "estúdio de estética",
+        "clínica de fisioterapia",
+        "consultório psicológico"
+      ],
+      "palavras_categoria": [
+        "odont",
+        "dentist",
+        "clínic",
+        "clinic",
+        "consult",
+        "salão",
+        "salao",
+        "estét",
+        "estet",
+        "lab"
+      ]
+    },
+    {
+      "id": "transporte",
+      "nome": "Transporte de passageiros",
+      "prioridade": "alta",
+      "motivo": "Ligação direta com o sistema de passagens da TACHYON.",
+      "termos": [
+        "transporte intermunicipal",
+        "fretamento de ônibus",
+        "van intermunicipal",
+        "ônibus interestadual",
+        "empresa de fretamento"
+      ],
+      "palavras_categoria": [
+        "ônibus",
+        "onibus",
+        "transporte",
+        "fretamento",
+        "van"
+      ]
+    },
+    {
+      "id": "servicos_engenharia",
+      "nome": "Prestadores de serviço e engenharia/manutenção",
+      "prioridade": "alta",
+      "motivo": "Marketplace, ordens de serviço e app de campo.",
+      "termos": [
+        "empresa de manutenção",
+        "engenharia civil",
+        "prestador de serviços",
+        "assistência técnica",
+        "empresa de reforma"
+      ],
+      "palavras_categoria": [
+        "engenharia",
+        "manutenção",
+        "manutencao",
+        "reforma",
+        "serviço",
+        "servico"
+      ]
+    },
+    {
+      "id": "educacao",
+      "nome": "Escolas, cursos e preparatórios",
+      "prioridade": "media",
+      "motivo": "Matrícula, área do aluno e pagamentos.",
+      "termos": [
+        "curso livre",
+        "cursinho preparatório",
+        "escola de idiomas",
+        "curso profissionalizante"
+      ],
+      "palavras_categoria": [
+        "escola",
+        "curso",
+        "idioma",
+        "preparat"
+      ]
+    },
+    {
+      "id": "alimentacao",
+      "nome": "Restaurantes e delivery",
+      "prioridade": "media",
+      "motivo": "Pedidos próprios sem taxa de plataforma.",
+      "termos": [
+        "restaurante",
+        "delivery",
+        "lanchonete",
+        "comida caseira delivery"
+      ],
+      "palavras_categoria": [
+        "restaur",
+        "lanch",
+        "delivery",
+        "comida"
+      ]
+    },
+    {
+      "id": "imobiliario",
+      "nome": "Imobiliárias e construtoras",
+      "prioridade": "media",
+      "motivo": "Catálogo e captação de leads.",
+      "termos": [
+        "imobiliária",
+        "construtora",
+        "corretor de imóveis"
+      ],
+      "palavras_categoria": [
+        "imob",
+        "construt",
+        "corretor"
+      ]
+    },
+    {
+      "id": "logistica_porto",
+      "nome": "Logística, indústria e região portuária",
+      "prioridade": "baixa",
+      "motivo": "Exploratório (Itaqui e entorno).",
+      "termos": [
+        "logística",
+        "transportadora",
+        "indústria",
+        "porto Itaqui"
+      ],
+      "palavras_categoria": [
+        "logíst",
+        "logist",
+        "porto",
+        "indústria",
+        "industria",
+        "transportadora"
+      ]
+    }
+  ]
+}

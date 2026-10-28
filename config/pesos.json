@@ -1,0 +1,43 @@
+{
+  "pesos_base": {
+    "porte_pagamento": 30,
+    "necessidade_digital": 40,
+    "aderencia_segmento": 30
+  },
+  "porte": {
+    "reviews_ate_20": 10,
+    "reviews_21_100": 40,
+    "reviews_101_300": 70,
+    "reviews_acima_300": 100,
+    "nota_bonus_por_ponto_acima_de_3": 5,
+    "nota_bonus_teto": 20
+  },
+  "necessidade": {
+    "sem_site": 50,
+    "site_quebrado": 45,
+    "sem_https": 15,
+    "sem_mobile": 15,
+    "parece_desatualizado": 20,
+    "sem_agendamento_online": 15,
+    "sem_whatsapp": 10,
+    "so_rede_social": 35,
+    "lento": 10
+  },
+  "penalidade_sistema_maduro": 35,
+  "limiar_qualificado": 55,
+  "cidade_padrao": "São Luís, MA, Brasil",
+  "fallback_lat": -2.5307,
+  "fallback_lon": -44.3068,
+  "coleta": {
+    "profundidade_padrao": 5,
+    "um_job_por_vez": true,
+    "max_time_segundos": 600,
+    "idioma": "pt",
+    "grid_padrao": 1,
+    "descartar_fora_da_cidade": true,
+    "descartar_fechados": true
+  },
+  "envio": {
+    "limite_diario": 30
+  }
+}

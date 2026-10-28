@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/radar.db
+data/radar.backup-*.db
+data/exports/*.csv
+!.gitkeep
+.env
+.DS_Store
+# kit clonado localmente (subir.ps1 clona se faltar)
+google-maps-scraper-kit/
+data/radar.db-wal
+data/radar.db-shm
+data/brutos/*.csv
+# nomes reais da equipe ficam só na máquina (ver config/equipe.exemplo.json)
+config/equipe.json
+# grafo gerado localmente pelo graphify
+graphify-out/

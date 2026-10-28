@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Radar TACHYON</title>
+  <link rel="stylesheet" href="/static/css/estilo.css?v=4" />
+</head>
+<body>
+  <header class="topo">
+    <div class="marca">Radar TACHYON <span>· prospecção</span></div>
+    <nav class="tabs" id="tabs">
+      <button type="button" data-tab="leads" class="ativo">Leads</button>
+      <button type="button" data-tab="campanhas">Campanhas</button>
+      <button type="button" data-tab="envios">WhatsApp</button>
+      <button type="button" data-tab="funil">Funil</button>
+      <button type="button" data-tab="nao">Não contatar</button>
+    </nav>
+    <div class="topo-dir">
+      <div class="motor" id="motor" title="Motor de coleta (Docker)"><i class="dot"></i><span>verificando…</span></div>
+      <label class="voce"><span>Você</span><select id="voce"><option value="">—</option></select></label>
+    </div>
+  </header>
+
+  <main>
+    <!-- Leads -->
+    <section class="painel ativo" id="tab-leads">
+      <div class="kpis" id="kpis"></div>
+
+      <div class="cartao">
+        <div class="filtros">
+          <input id="f-q" class="busca" type="search" placeholder="Buscar nome, telefone, categoria, endereço…" />
+          <select id="f-segmento"><option value="">Todos os segmentos</option></select>
+          <select id="f-status"><option value="">Todos os status</option></select>
+          <input id="f-bairro" placeholder="Bairro" />
+          <input id="f-pmin" type="number" min="0" max="100" placeholder="Pts mín." />
+          <label class="check"><input type="checkbox" id="f-semsite" /> Sem site</label>
+          <label class="check"><input type="checkbox" id="f-tel" /> Com telefone</label>
+          <span class="sep"></span>
+          <select id="f-ordem" title="Ordenar por">
+            <option value="pontuacao">Maior pontuação</option>
+            <option value="avaliacoes">Mais avaliações</option>
+            <option value="atualizado">Atualizados recentemente</option>
+            <option value="nome">Nome (A–Z)</option>
+          </select>
+          <button class="btn" type="button" id="btnLimpar">Limpar</button>
+          <a class="btn" id="btnExport" href="/api/exportar">Exportar CSV</a>
+          <button class="btn" type="button" id="btnLote" title="Monta a fila de WhatsApp com os filtros atuais">WhatsApp em lote</button>
+        </div>
+        <div class="tabela-wrap">
+          <table class="clicavel">
+            <thead>
+              <tr>
+                <th>Pts</th>
+                <th>Empresa</th>
+                <th>Bairro</th>
+                <th>Presença</th>
+                <th>Status</th>
+                <th class="col-opc">Próximo passo</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyLeads"></tbody>
+          </table>
+        </div>
+        <div class="paginacao">
+          <span id="pagInfo"></span>
+          <div class="linha">
+            <button class="btn mini" type="button" id="pagAnt">Anterior</button>
+            <button class="btn mini" type="button" id="pagProx">Próxima</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Campanhas -->
+    <section class="painel" id="tab-campanhas">
+      <div class="grade-2">
+        <div class="cartao">
+          <header><h2>Nova campanha</h2></header>
+          <div class="corpo pilha">
+            <label class="campo">Nome<input id="c-nome" value="Clínicas odontológicas SLZ" /></label>
+            <label class="campo">Segmento<select id="c-segmento"></select></label>
+            <label class="campo">
+              <span class="linha" style="justify-content:space-between">Termos de busca (um por linha)
+                <button class="btn link mini" type="button" id="btnTermosSeg">usar termos do segmento</button></span>
+              <textarea id="c-termos" rows="4">clínica odontológica</textarea>
+            </label>
+            <label class="campo">Cidade<input id="c-cidade" value="São Luís, MA, Brasil" /></label>
+            <div class="linha" style="gap:12px">
+              <label class="campo" style="flex:1">Profundidade
+                <input id="c-depth" type="number" value="5" min="1" max="20" />
+              </label>
+              <label class="campo" style="flex:1">Cobertura
+                <select id="c-grid">
+                  <option value="1">Centro (1 job)</option>
+                  <option value="2">Cidade 2×2 (4 jobs)</option>
+                  <option value="3">Cidade 3×3 (9 jobs)</option>
+                </select>
+              </label>
+            </div>
+            <p class="ajuda">Um job por vez. Profundidade 5 e cobertura central são o volume recomendado; grids maiores aumentam o risco de bloqueio do Google.</p>
+            <div class="linha">
+              <button class="btn primario" type="button" id="btnCampanha">Rodar campanha</button>
+              <button class="btn perigo" type="button" id="btnCancelar" hidden>Cancelar</button>
+            </div>
+            <div class="log" id="campanhaLog" hidden></div>
+          </div>
+        </div>
+        <div class="cartao">
+          <header>
+            <h2>Histórico</h2>
+            <button class="btn mini" type="button" id="btnRepontuar" title="Recarrega config/pesos.json e recalcula todas as pontuações">Recalcular pontuações</button>
+          </header>
+          <div class="tabela-wrap">
+            <table>
+              <thead><tr><th>#</th><th>Campanha</th><th>Status</th><th>Leads</th><th>Data</th><th></th></tr></thead>
+              <tbody id="listaCampanhas"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Funil -->
+    <section class="painel" id="tab-funil">
+      <div class="grade-2">
+        <div class="cartao">
+          <header><h2>Funil por status</h2></header>
+          <div class="corpo"><div class="funil" id="funilStatus"></div></div>
+        </div>
+        <div class="pilha" style="gap:20px">
+          <div class="cartao">
+            <header><h2>Por segmento</h2><span class="muted small">taxa = engajados ÷ abordados</span></header>
+            <div class="tabela-wrap"><table>
+              <thead><tr><th>Segmento</th><th class="num">Leads</th><th class="num">Qualif.</th><th class="num">Contatados</th><th class="num">Engajados</th><th class="num">Fechados</th><th class="num">Pts méd.</th><th class="num">Taxa</th></tr></thead>
+              <tbody id="funilTaxas"></tbody>
+            </table></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WhatsApp -->
+    <section class="painel" id="tab-envios">
+      <div class="grade-2">
+        <div class="cartao">
+          <header><h2>Quem vai receber</h2></header>
+          <div class="corpo pilha">
+            <label class="campo">Segmento<select id="e-segmento"><option value="">Todos os segmentos</option></select></label>
+            <label class="campo">Status
+              <select id="e-status">
+                <option value="novo,qualificado">Novos e qualificados</option>
+                <option value="qualificado">Só qualificados</option>
+                <option value="novo">Só novos</option>
+              </select>
+            </label>
+            <div class="linha" style="gap:12px">
+              <label class="campo" style="flex:1">Pontuação mínima<input id="e-pmin" type="number" min="0" max="100" placeholder="ex.: 60" /></label>
+              <label class="campo" style="flex:1">Bairro<input id="e-bairro" placeholder="Qualquer" /></label>
+            </div>
+            <label class="check"><input type="checkbox" id="e-semsite" /> Só empresas sem site próprio</label>
+            <label class="check"><input type="checkbox" id="e-contatados" /> Incluir quem já foi contatado</label>
+            <p class="ajuda" id="e-origem" hidden></p>
+            <div class="linha"><button class="btn primario" type="button" id="btnFila">Montar fila</button></div>
+            <p class="ajuda">
+              Ficam de fora automaticamente: lista não contatar, quem não tem celular, órgãos públicos, leads fechados,
+              perdidos ou descartados e telefones repetidos. A mensagem só cita problemas que a verificação confirmou.
+            </p>
+          </div>
+        </div>
+        <div class="cartao">
+          <header><h2>Fila de envio</h2><span class="muted small" id="filaInfo"></span></header>
+          <div class="corpo pilha" id="filaAtual"><p class="muted">Escolha os filtros e clique em <strong>Montar fila</strong>.</p></div>
+          <div class="tabela-wrap"><table>
+            <thead><tr><th><input type="checkbox" id="filaTodos" checked title="Marcar ou desmarcar todos" /></th><th>Pts</th><th>Empresa</th><th>Telefone</th><th>Situação</th></tr></thead>
+            <tbody id="filaLista"></tbody>
+          </table></div>
+          <p class="ajuda" id="filaExcluidos" style="padding:12px 16px"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Não contatar -->
+    <section class="painel" id="tab-nao">
+      <div class="cartao">
+        <header>
+          <h2>Lista não contatar</h2>
+          <span class="muted small">Bloqueia abordagem e rascunho. Leads com o mesmo telefone ou e-mail são descartados.</span>
+        </header>
+        <div class="filtros">
+          <input id="nc-tel" placeholder="Telefone" />
+          <input id="nc-email" placeholder="E-mail" />
+          <input id="nc-nome" placeholder="Nome" />
+          <input id="nc-motivo" placeholder="Motivo" class="busca" />
+          <button class="btn primario" type="button" id="btnNao">Adicionar</button>
+        </div>
+        <div class="tabela-wrap"><table>
+          <thead><tr><th>Nome</th><th>Telefone</th><th>E-mail</th><th>Motivo</th><th>Desde</th><th></th></tr></thead>
+          <tbody id="listaNao"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <p class="rodape">
+      Coleta via google-maps-scraper-kit (local). Volume baixo, um job por vez. Telefones e e-mails podem ser dados pessoais (LGPD).
+      Mensagens nunca saem sozinhas: o painel abre cada conversa no WhatsApp com o texto pronto e você aperta enviar.
+    </p>
+  </main>
+
+  <aside class="ficha" id="ficha" aria-hidden="true">
+    <div class="ficha-topo" id="fichaTopo"></div>
+    <div class="ficha-corpo" id="fichaCorpo"></div>
+  </aside>
+
+  <div class="toasts" id="toasts"></div>
+  <script src="/static/js/app.js?v=4"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "equipe": "TACHYON",
+  "apresentacao": "uma equipe de desenvolvimento de software aqui de São Luís",
+  "modelo": "{saudacao}! Aqui é {assinatura}, {apresentacao}.\n\n{abertura}\n\n{proposta}\n\n{convite}\n\n{saida}",
+  "abertura_com_observacao": "Vimos o perfil de vocês no Google Maps e notamos que {observacao}.",
+  "abertura_sem_observacao": "Estamos conversando com {publico} da região sobre ferramentas digitais que poupam tempo no dia a dia.",
+  "saida": "Se não for do interesse de vocês, é só responder \"sair\" que não mandamos mais mensagens.",
+  "padrao": {
+    "publico": "empresas",
+    "proposta": "Desenvolvemos sistemas sob medida, como sites, agendamento online e painéis de gestão, pensados para o tamanho de cada negócio.",
+    "convite": "Faz sentido mandarmos um resumo curto de como poderíamos ajudar?"
+  },
+  "segmentos": {
+    "clinicas": {
+      "publico": "clínicas e consultórios",
+      "proposta": "Para clínicas, costumamos montar agendamento online com lembretes automáticos, o que reduz faltas e tira peso da recepção.",
+      "convite": "Podemos mandar um resumo curto de como funciona?"
+    },
+    "transporte": {
+      "publico": "empresas de transporte de passageiros",
+      "proposta": "Já desenvolvemos uma plataforma de venda de passagens com escolha de poltrona, pagamento por PIX e bilhete digital.",
+      "convite": "Se tiver interesse, mostramos em poucos minutos como ela funciona."
+    },
+    "servicos_engenharia": {
+      "publico": "prestadores de serviço",
+      "proposta": "Trabalhamos com sistemas de ordens de serviço e agenda de equipe pelo celular, como o Synap Go, um marketplace de prestadores que desenvolvemos.",
+      "convite": "Topa uma conversa rápida para ver se isso se encaixa na rotina de vocês?"
+    },
+    "educacao": {
+      "publico": "escolas e cursos",
+      "proposta": "Para escolas e cursos, montamos matrícula online, área do aluno e controle de pagamentos num só lugar.",
+      "convite": "Podemos mandar um resumo para vocês avaliarem, sem compromisso?"
+    },
+    "alimentacao": {
+      "publico": "restaurantes",
+      "proposta": "Para restaurantes, desenvolvemos canais de pedido próprios, sem a taxa cobrada pelos aplicativos de entrega.",
+      "convite": "Se fizer sentido, podemos trocar uma ideia rápida?"
+    },
+    "imobiliario": {
+      "publico": "imobiliárias e construtoras",
+      "proposta": "Para imobiliárias e construtoras, montamos catálogo de imóveis online com captação de contatos interessados.",
+      "convite": "Podemos mostrar um exemplo em poucos minutos?"
+    },
+    "logistica_porto": {
+      "publico": "empresas de logística e indústria",
+      "proposta": "Desenvolvemos sistemas sob medida para a operação, como controle de cargas, agendamentos e relatórios.",
+      "convite": "Se houver alguma necessidade nessa linha, podemos conversar?"
+    }
+  }
+}
